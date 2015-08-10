@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+
+
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!--scroll view 只可以有一个直接的子节点-->
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+
+            <!--在线性布局的内部放置多个按钮是可行的 -->
+
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/btn_goto_webview"
+                android:text="webview demo"
+                android:layout_marginBottom="5dp"
+                />
+
+
+            <Button
+                android:id="@+id/btn_goto_http"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="使用HTTP协议 demo1"
+                android:layout_marginBottom="5dp"
+                />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="空白"
+                android:layout_marginBottom="5dp"
+                />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="空白"
+                android:layout_marginBottom="5dp"
+                />
+
+
+
+
+
+            </LinearLayout>
+
+
+
+
+
+
+        </ScrollView>
+
+</LinearLayout>

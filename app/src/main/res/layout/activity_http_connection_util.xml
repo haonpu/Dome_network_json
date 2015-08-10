@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:orientation="vertical"
+    >
+
+
+<TextView
+    android:text="使用http协议访问网络--httpURLConnection的使用"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    />
+
+    <Button
+        android:id="@+id/btn_send_request"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="发送请求 httpURLConnection"
+        />
+
+    <Button
+        android:id="@+id/btn_send_request_http_client"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="发送请求 httpClient 方式"
+        />
+
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/txt_response_text"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+
+
+        </ScrollView>
+
+
+
+</LinearLayout>
+
