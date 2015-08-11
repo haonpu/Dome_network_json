@@ -48,6 +48,15 @@ public class Main extends ActionBarActivity {
             }
         });
 
+        Button btn_goto_json = (Button) findViewById(R.id.btn_goto_json);
+        btn_goto_json.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent  = new Intent(Main.this,JsonProcess.class);
+                startActivity(intent);
+            }
+        });
+
 
     }
 

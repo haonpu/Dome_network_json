@@ -42,9 +42,10 @@
                 />
 
             <Button
+                android:id="@+id/btn_goto_json"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="空白"
+                android:text="发送http请求，处理json数据"
                 android:layout_marginBottom="5dp"
                 />
 
