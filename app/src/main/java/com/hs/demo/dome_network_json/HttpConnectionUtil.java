@@ -106,6 +106,7 @@ public class HttpConnectionUtil extends ActionBarActivity {
         });
 
 
+        //绑定监听事件
         btn_sentRequest = (Button) findViewById(R.id.btn_send_request_http_client);
         btn_sentRequest.setOnClickListener(new View.OnClickListener() {
             @Override
