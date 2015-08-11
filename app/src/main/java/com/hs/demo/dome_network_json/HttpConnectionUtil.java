@@ -112,7 +112,7 @@ public class HttpConnectionUtil extends ActionBarActivity {
             @Override
             public void onClick(View view) {
                 Log.d("debug","click the button 发送http请求-----httpClient");
-                Log.d("debug","btn send request with http clients");
+                Log.d("debug","btn send request with http clients----->");
                 sendHttpRequestWithHttpClient();
             }
         });
