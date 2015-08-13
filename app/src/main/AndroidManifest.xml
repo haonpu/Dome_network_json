@@ -4,12 +4,23 @@
 
     <!-- 索取使用网络功能的权限 -->
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <application
+        android:name="com.hs.demo.dome_network_json.MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
+
+        <!-- 添加开发者密钥-->
+        <meta-data
+            android:name="com.thinkland.juheapi.openid"
+            android:value="JH9c013b3e708755f7b6feebdeabf55b3c" />
+
         <activity
             android:name=".Main"
             android:label="@string/app_name" >
