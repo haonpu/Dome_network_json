@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:orientation="vertical"
+    >
+
+
+<TextView
+    android:text="Service test"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    />
+
+    <Button
+        android:id="@+id/btn_change_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="点击改变textview的文字"
+        />
+    <TextView
+        android:id="@+id/tv_show_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="下载即将开始"
+        />
+
+    <Button
+        android:id="@+id/btn_service_start"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="启动 service"
+        android:layout_marginTop="5dp"
+        />
+
+    <Button
+        android:id="@+id/btn_service_stop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="关闭 service"
+        android:layout_marginTop="5dp"
+        />
+
+    <Button
+        android:id="@+id/btn_bind_service"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="bind service "
+        />
+
+    <Button
+        android:id="@+id/btn_unbind_service"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="unbind service"
+        />
+
+    <Button
+        android:id="@+id/btn_intent_service"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Intent service 处理后台任务"
+        />
+
+
+
+
+
+
+</LinearLayout>

@@ -50,9 +50,10 @@
                 />
 
             <Button
+                android:id="@+id/btn_goto_service"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="空白"
+                android:text="Service 多线程 异步任务"
                 android:layout_marginBottom="5dp"
                 />
 

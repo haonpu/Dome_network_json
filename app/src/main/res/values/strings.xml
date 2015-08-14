@@ -6,4 +6,5 @@
     <string name="title_activity_web_view_util">WebViewUtil</string>
     <string name="title_activity_http_connection_util">HttpConnectionUtil</string>
     <string name="title_activity_json_process">JsonProcess</string>
+    <string name="title_activity_service_test">ServiceTest</string>
 </resources>

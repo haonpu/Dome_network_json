@@ -16,6 +16,8 @@ import android.widget.Button;
 
 public class Main extends ActionBarActivity {
 
+    private  Button btn_goto_service;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,6 +28,12 @@ public class Main extends ActionBarActivity {
         Log.d("debug","create main activity---->");
 
         setContentView(R.layout.main);
+
+
+        //打开程序时，启动定时任务
+        Intent intent = new Intent(this,LongRunningService.class);
+
+        startService(intent);
 
 
         //获取button控件
@@ -54,6 +62,18 @@ public class Main extends ActionBarActivity {
             public void onClick(View view) {
                 Intent intent  = new Intent(Main.this,JsonProcess.class);
                 startActivity(intent);
+            }
+        });
+
+        btn_goto_service = (Button) findViewById(R.id.btn_goto_service);
+        btn_goto_service.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //跳转到 ServiceTest页面
+                Log.d("debug","goto  service test activity");
+                Intent intent = new Intent(Main.this,ServiceTest.class);
+                startActivity(intent);
+
             }
         });
 

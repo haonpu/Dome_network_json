@@ -10,13 +10,13 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <application
-        android:name="com.hs.demo.dome_network_json.MyApplication"
+        android:name=".MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
 
-        <!-- 添加开发者密钥-->
+        <!-- 添加开发者密钥 -->
         <meta-data
             android:name="com.thinkland.juheapi.openid"
             android:value="JH9c013b3e708755f7b6feebdeabf55b3c" />
@@ -42,6 +42,31 @@
             android:name=".JsonProcess"
             android:label="@string/title_activity_json_process" >
         </activity>
+        <activity
+            android:name=".ServiceTest"
+            android:label="@string/title_activity_service_test" >
+        </activity>
+
+        <service
+            android:name=".MyService"
+            android:enabled="true"
+            android:exported="true" >
+        </service>
+        <service
+            android:name=".MyIntentService"
+            android:exported="false" >
+        </service>
+        <service
+            android:name=".LongRunningService"
+            android:enabled="true"
+            android:exported="true" >
+        </service>
+
+        <receiver
+            android:name=".AlarmReceiver"
+            android:enabled="true"
+            android:exported="true" >
+        </receiver>
     </application>
 
 </manifest>
