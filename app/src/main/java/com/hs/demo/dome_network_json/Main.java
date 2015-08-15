@@ -11,12 +11,13 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewStub;
 import android.widget.Button;
 
 
-public class Main extends ActionBarActivity {
+public class Main extends ActionBarActivity implements View.OnClickListener{
 
-    private  Button btn_goto_service;
+    private  Button btn_goto_service,btn_goto_save_data;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +36,9 @@ public class Main extends ActionBarActivity {
 
         startService(intent);
 
+
+        btn_goto_save_data = (Button) findViewById(R.id.btn_goto_save_data);
+        btn_goto_save_data.setOnClickListener(this);
 
         //获取button控件
         Button btn_goto_webview = (Button) findViewById(R.id.btn_goto_webview);
@@ -80,6 +84,20 @@ public class Main extends ActionBarActivity {
 
     }
 
+
+    @Override
+    public void onClick(View view) {
+        switch(view.getId()){
+            case R.id.btn_goto_save_data:
+                Log.d("debug","click the goto save data button---->");
+                Intent intent = new Intent(Main.this,FileSave.class);
+                startActivity(intent);
+                break;
+            default:
+                break;
+
+        }
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
