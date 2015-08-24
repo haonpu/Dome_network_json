@@ -6,6 +6,20 @@ android:orientation="vertical"
     >
 
 
+
+    <Button
+        android:id="@+id/btn_use_shared_preferenced"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="使用 shared preference"/>
+
+    <Button
+        android:id="@+id/btn_restore_data"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="还原sharedPreferences的数据"/>
+
+
     <EditText
         android:id="@+id/edit_input"
         android:layout_width="match_parent"

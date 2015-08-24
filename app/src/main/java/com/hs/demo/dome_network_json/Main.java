@@ -14,10 +14,12 @@ import android.view.View;
 import android.view.ViewStub;
 import android.widget.Button;
 
+import com.hs.demo.dome_network_json.activities.Database;
+
 
 public class Main extends ActionBarActivity implements View.OnClickListener{
 
-    private  Button btn_goto_service,btn_goto_save_data;
+    private  Button btn_goto_service,btn_goto_save_data,btn_sqlite;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +40,10 @@ public class Main extends ActionBarActivity implements View.OnClickListener{
 
 
         btn_goto_save_data = (Button) findViewById(R.id.btn_goto_save_data);
+        btn_sqlite = (Button) findViewById(R.id.btn_sqlite);
+
         btn_goto_save_data.setOnClickListener(this);
+        btn_sqlite.setOnClickListener(this);
 
         //获取button控件
         Button btn_goto_webview = (Button) findViewById(R.id.btn_goto_webview);
@@ -92,6 +97,12 @@ public class Main extends ActionBarActivity implements View.OnClickListener{
                 Log.d("debug","click the goto save data button---->");
                 Intent intent = new Intent(Main.this,FileSave.class);
                 startActivity(intent);
+                break;
+            case R.id.btn_sqlite:
+
+                Intent intent1 = new Intent(Main.this,Database.class);
+                startActivity(intent1);
+
                 break;
             default:
                 break;

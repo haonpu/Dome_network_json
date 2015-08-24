@@ -1,5 +1,9 @@
 package com.hs.demo.dome_network_json;
 
+import android.content.ContentValues;
+import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.ActionBarActivity;
@@ -15,6 +19,7 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.hs.demo.dome_network_json.activities.Database;
 import com.thinkland.sdk.android.DataCallBack;
 import com.thinkland.sdk.android.JuheData;
 import com.thinkland.sdk.android.Parameters;
@@ -30,15 +35,28 @@ import org.json.JSONObject;
 import org.json.JSONTokener;
 import org.w3c.dom.Text;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.List;
 
 import Utils.App;
 import Utils.HttpCallbackListener;
 import Utils.HttpUtil;
+import Utils.MyDatabaseHelper;
 import Utils.PersonID;
 
 
-public class JsonProcess extends ActionBarActivity {
+/*
+*
+* 发送http请求返回json数据
+*
+ */
+
+
+public class JsonProcess extends ActionBarActivity implements View.OnClickListener {
 
 
     //定义变量
@@ -47,6 +65,9 @@ public class JsonProcess extends ActionBarActivity {
     private  Button btn_get_id;
     private EditText input_id;   //身份账号输入框，获取身份证号码
     private TextView   tv_show_id_info;
+    private MyDatabaseHelper dbHelper;
+    private Button btn_search_history_info;
+
     //private TextView responseText;
 
 
@@ -63,10 +84,50 @@ public class JsonProcess extends ActionBarActivity {
                     String response = (String) msg.obj;
                     //responseText.setText(response);    //设置textview的值
                     tv_show_id_info.setText(response);
+
             }
         }
 
     };
+
+
+
+
+    @Override
+    public void onClick(View view) {
+        switch(view.getId()){
+            case R.id.btn_search_history_info:
+                Log.d("debug","查询历史信息---->");
+
+                SQLiteDatabase db = dbHelper.getWritableDatabase();
+                //查询表中的所有的数据  Id_recorders
+                String sql_str = "select * from Id_records";
+                Cursor cursor = db.rawQuery(sql_str, null);
+
+                if(cursor.moveToFirst()){
+                    do {
+                        //遍历cursor
+                        String area = cursor.getString(cursor.getColumnIndex("area"));
+                        String gender = cursor.getString(cursor.getColumnIndex("gender"));
+                        String birth_date = cursor.getString(cursor.getColumnIndex("birth_date"));
+
+                        Log.d("debug"," area:" +area );
+                        Log.d("debug"," gender:" + gender);
+                        Log.d("debug"," birth_date:" +birth_date );
+                        //Log.d("debug"," :" + );
+
+                    }while (cursor.moveToNext() );
+                }
+
+                cursor.close();
+                break;
+
+            default:
+                break;
+
+        }
+    }
+
 
 
 
@@ -80,9 +141,13 @@ public class JsonProcess extends ActionBarActivity {
 
 
         btn_get_id = (Button) findViewById(R.id.btn_get_id);
+        btn_search_history_info = (Button)findViewById(R.id.btn_search_history_info);
 
         tv_show_id_info = (TextView) findViewById(R.id.tv_show_id_info);
 
+        dbHelper = new MyDatabaseHelper(this,"IdRecords.db",null,2);
+
+        btn_search_history_info.setOnClickListener(this);
 
         btn_get_id.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -160,16 +225,55 @@ public class JsonProcess extends ActionBarActivity {
             }
         });
 
+
+
+
+
+
+
         //绑定监听事件
         btn_get_json = (Button) findViewById(R.id.btn_get_json);
         btn_get_json.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d("debug", "点击button获取json数据");
+                Log.d("debug", "点击button获取百度 的 ---json数据");
 
                 //sendHttpRequestWithHttpClient();
 
+                //查询身份证信息  ，api 来自百度 API STORE
+                String httpUrl = "http://apis.baidu.com/apistore/idservice/id";
+                String httpArg = "id=130625198912180418";
+                httpUrl = httpUrl + "?" + httpArg;
+
+
+                HttpUtil.sendHttpRequest(httpUrl,new HttpCallbackListener() {
+
+                    @Override
+                    public void onFinish(String response) {
+                        //在这里执行返回具体内容的逻辑
+                        parseJSONWithGSON(response);
+                        Log.d("debug","msg from baidu is : "   + response);
+                    }
+
+                    @Override
+                    public void onError(Exception e) {
+                        //在这里执行异常情况的处理
+                        e.printStackTrace();
+                    }
+                });
+
+
+                //String jsonResult = request(httpUrl, httpArg);
+                //System.out.println(jsonResult);
+                //Log.d("debug","来自百度的查询结果:  "  + jsonResult);
+
+
+
+                //=================
+
+
                 //使用封装好的实体类发送数据
+                /*
                 String address = "http://10.10.20.145/get_data.json";
                 Log.d("debug","调用封装好的实体类发送数据");
                 HttpUtil.sendHttpRequest(address,new HttpCallbackListener() {
@@ -186,9 +290,14 @@ public class JsonProcess extends ActionBarActivity {
                         e.printStackTrace();
                     }
                 });
+                */
             }
         });
     }
+
+
+
+   
 
 
     //处理http请求
@@ -293,10 +402,29 @@ public class JsonProcess extends ActionBarActivity {
             str_search_result +=       "出生日期: "  + person.getString("birthday") + "\n";
 
 
+            SQLiteDatabase db = dbHelper.getWritableDatabase();
+            ContentValues values = new ContentValues();
+            //开始组装数据
+            Log.d("debug","将数据插入sqlite数据库");
+            String id_num = input_id.getText().toString().trim();
+            Log.d("debug","id nums" + id_num);
+
+            values.put("id_num",id_num);
+            values.put("gender",person.getString("sex"));
+            values.put("area", person.getString("area") );
+            values.put("birth_date", person.getString("birthday") );
+            Log.d("debug","数据插入 完成");
+            db.insert("Id_records",null,values);
+
+            values.clear();
+
+
+
+
             Message message = new Message();
             message.what = SHOW_RESPONSE;
             message.obj = str_search_result;
-            handler.sendMessage(message);
+            handler.sendMessage(message);   //发送消息 更新UI的显示效果
 
         }catch (Exception e){
             e.printStackTrace();

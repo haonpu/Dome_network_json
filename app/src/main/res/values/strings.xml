@@ -8,4 +8,5 @@
     <string name="title_activity_json_process">JsonProcess</string>
     <string name="title_activity_service_test">ServiceTest</string>
     <string name="title_activity_file_save">FileSave</string>
+    <string name="title_activity_database">Database</string>
 </resources>

@@ -2,12 +2,14 @@ package com.hs.demo.dome_network_json;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 
 import java.io.BufferedWriter;
@@ -20,6 +22,8 @@ public class FileSave extends ActionBarActivity implements View.OnClickListener{
 
 
     private EditText edit_input ;
+    private Button btn_shared_preference,btn_restore_data;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,14 +32,46 @@ public class FileSave extends ActionBarActivity implements View.OnClickListener{
 
         edit_input = (EditText) findViewById(R.id.edit_input);
         //edit_input.setOnClickListener(this);
+        btn_shared_preference = (Button) findViewById(R.id.btn_use_shared_preferenced);
+
+        btn_restore_data = (Button) findViewById(R.id.btn_restore_data);
+        setListeners();
+
+
+    }
+
+    private void setListeners(){
+        btn_shared_preference.setOnClickListener(this);
+        btn_restore_data.setOnClickListener(this);
     }
 
 
     @Override
     public void onClick(View view) {
         switch (view.getId()){
-            case 1:
+            case R.id.edit_input:
                 Log.d("debug","click the onClick button--->");
+                break;
+            case R.id.btn_use_shared_preferenced:
+                Log.d("debug","click the shared preference button--->");
+                //将数据简单的保存到SharedPreferences文件中
+                SharedPreferences.Editor editor = getSharedPreferences("data",MODE_PRIVATE).edit();
+                editor.putString("name","haoshuo");
+                editor.putInt("age",25);
+                editor.putBoolean("married",false);
+
+                editor.commit();
+                break;
+
+            case R.id.btn_restore_data:
+                SharedPreferences pref = getSharedPreferences("data",MODE_PRIVATE);
+                String name = pref.getString("name","");
+                int age = pref.getInt("age",0);
+                boolean married = pref.getBoolean("married",false);
+                Log.d("debug","显示获取到的结果==============>  ");
+                Log.d("debug","name is : " + name);
+                Log.d("debug","age is " + age);
+                Log.d("debug","married is " + married);
                 break;
             default:
                 break;

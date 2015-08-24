@@ -21,6 +21,10 @@ public class HttpUtil {
                     connection = (HttpURLConnection) url.openConnection();
                     connection.setRequestMethod("GET");
                     connection.setConnectTimeout(8000);
+
+                    // 填入apikey到HTTP header
+                    connection.setRequestProperty("apikey",  "f3dfd2e9c2a6d365cbc281607403de5f");
+
                     connection.setReadTimeout(8000);
                     connection.setDoInput(true);
                     connection.setDoOutput(true);

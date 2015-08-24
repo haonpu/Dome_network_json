@@ -72,6 +72,10 @@
             android:name=".FileSave"
             android:label="@string/title_activity_file_save" >
         </activity>
+        <activity
+            android:name=".activities.Database"
+            android:label="@string/title_activity_database" >
+        </activity>
     </application>
 
 </manifest>
